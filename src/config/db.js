@@ -7,7 +7,7 @@ dotenv.config();
 export const mongoConnect = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
-      dbName: "vipin",
+      dbName: process.env.DB_COLLECTION_NAME,
     });
     console.log(chalk.bgGreen.bold("MongoDB connected successfully"));
   } catch (error) {
