@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 
 // Inquiry mail
 
-export const sendMail = async (userData) => {
+export const sendMail = async (userData, img) => {
   const htmlContent = `
     <!DOCTYPE html>
     <html lang="en">
