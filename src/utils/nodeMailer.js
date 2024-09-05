@@ -77,7 +77,7 @@ export const sendMail = async (userData, img) => {
         <div class="header"></div>
         <table>
             <tr>
-                <td><strong>Name:P</strong></td>
+                <td><strong>Name:</strong></td>
                 <td>${userData.name}</td>
             </tr>
             <tr>
