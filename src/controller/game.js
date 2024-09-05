@@ -39,7 +39,7 @@ export const getData = asyncHandler(async (req, res) => {
   const totalUsers = await usersModel.countDocuments();
   totalPages = Math.ceil(totalUsers / limit);
 
-  const result = await usersModel.find().skip(skip).limit(limit)
+  const result = await usersModel.find().sort({updatedAt: -1}).skip(skip).limit(limit)
   res.status(200).json({status: true, totalPages, page, result:result})
 })
 
