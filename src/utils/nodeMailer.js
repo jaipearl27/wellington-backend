@@ -77,12 +77,16 @@ export const sendMail = async (userData) => {
         <div class="header"></div>
         <table>
             <tr>
-                <td><strong>Name</strong></td>
+                <td><strong>Name:P</strong></td>
                 <td>${userData.name}</td>
             </tr>
             <tr>
-                <td><strong>E-Mail</strong></td>
+                <td><strong>E-Mail:</strong></td>
                 <td>${userData.email}</td>
+            </tr>
+            <tr>
+                <td><strong>Your Image:</strong></td>
+                <td>${img[0].url}</td>
             </tr>
         </table>
     </div>
