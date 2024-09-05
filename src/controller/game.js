@@ -22,7 +22,7 @@ export const handleGeneratedImage = asyncHandler(async (req, res) => {
       image: uploadedImage.result
     }
     await usersModel.create(payload)
-    await sendMail(req.body);
+    await sendMail(req.body, uploadedImage.result);
     
     res.status(200).json({status: true, message: "Image saved & mail sent successfully"})
   }
