@@ -39,7 +39,23 @@ export const getData = asyncHandler(async (req, res) => {
   const totalUsers = await usersModel.countDocuments();
   totalPages = Math.ceil(totalUsers / limit);
 
-  const result = await usersModel.find().sort({updatedAt: -1}).skip(skip).limit(limit)
+  const result = await usersModel.find().select('name image').sort({updatedAt: -1}).skip(skip).limit(limit)
   res.status(200).json({status: true, totalPages, page, result:result})
 })
 
+
+
+//GET
+// GET paginated user data for admin 
+
+export const getUsers = asyncHandler(async (req, res) => {
+  const limit = req?.query?.limit || 12;
+  const page = req?.query?.page || 1;
+  const skip = (page - 1) * limit;
+  let totalPages = 0;
+  const totalUsers = await usersModel.countDocuments();
+  totalPages = Math.ceil(totalUsers / limit);
+
+  const result = await usersModel.find().sort({updatedAt: -1}).skip(skip).limit(limit)
+  res.status(200).json({status: true, totalPages, page, result:result})
+})
