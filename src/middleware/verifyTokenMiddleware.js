@@ -6,8 +6,9 @@ export const verifyTokenMiddleware = async (req, res, next) => {
   try {
 
     const cookies = req?.cookies;
-    // console.log('cookies',cookies)
     const access_token = cookies[process.env.TOKEN_NAME];
+  
+    console.log('cookies',access_token)
 
 
     if (!access_token) {

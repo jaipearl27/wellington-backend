@@ -88,7 +88,7 @@ export const refreshToken = asyncHandler(async (req, res) => {
     {
       id: user._id,
     },
-    process.env.REFRESH_TOKEN_SECRET,
+    process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: refreshTokenValidity }
   );
 

@@ -1,5 +1,5 @@
 // validities
-export const accessTokenValidity = "15m";
+export const accessTokenValidity = "30s";
 export const refreshTokenValidity = "15d";
 // ----------------------------------------------------------------------------------------
 
