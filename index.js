@@ -21,7 +21,7 @@ app.use(cookieParser())
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:3001", "http://localhost:3000", "https://wellington-1.vercel.app"],
+    origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:3001", "http://localhost:3000", "https://wellington-1.vercel.app", "https://game.wellington.live", "https://admin.wellington.live"],
     credentials: true, //uncomment this if you want to send tokens in cookie from frontend
     methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
