@@ -3,8 +3,7 @@ import { uploadFile } from "../utils/cloudinary.js";
 import { asyncHandler } from "../utils/errorHandler/asyncHandler.js";
 import { sendMail } from "../utils/nodeMailer.js";
 
-
-//POST 
+//POST
 //Saves generated image in cloudinary & url in MongoDB and sends a copy for the same to the user on the email
 
 export const handleGeneratedImage = asyncHandler(async (req, res) => {
@@ -15,21 +14,23 @@ export const handleGeneratedImage = asyncHandler(async (req, res) => {
       .status(500)
       .json({ status: false, message: "Incomplete form parameters" });
   } else {
-    const uploadedImage = await uploadFile(req?.files)
+    const uploadedImage = await uploadFile(req?.files);
     const payload = {
       name,
       email,
-      image: uploadedImage.result
-    }
-    await usersModel.create(payload)
+      image: uploadedImage.result,
+    };
+    await usersModel.create(payload);
     await sendMail(req.body, uploadedImage.result);
-    
-    res.status(200).json({status: true, message: "Image saved & mail sent successfully"})
+
+    res
+      .status(200)
+      .json({ status: true, message: "Image saved & mail sent successfully" });
   }
 });
 
 //GET
-// GET paginated user data 
+// GET paginated user data
 
 export const getData = asyncHandler(async (req, res) => {
   const limit = req?.query?.limit || 12;
@@ -39,14 +40,17 @@ export const getData = asyncHandler(async (req, res) => {
   const totalUsers = await usersModel.countDocuments();
   totalPages = Math.ceil(totalUsers / limit);
 
-  const result = await usersModel.find().select('name image').sort({updatedAt: -1}).skip(skip).limit(limit)
-  res.status(200).json({status: true, totalPages, page, result:result})
-})
-
-
+  const result = await usersModel
+    .find()
+    .select("name image")
+    .sort({ updatedAt: -1 })
+    .skip(skip)
+    .limit(limit);
+  res.status(200).json({ status: true, totalPages, page, result: result });
+});
 
 //GET
-// GET paginated user data for admin 
+// GET paginated user data for admin
 
 export const getUsers = asyncHandler(async (req, res) => {
   const limit = req?.query?.limit || 12;
@@ -56,6 +60,21 @@ export const getUsers = asyncHandler(async (req, res) => {
   const totalUsers = await usersModel.countDocuments();
   totalPages = Math.ceil(totalUsers / limit);
 
-  const result = await usersModel.find().sort({updatedAt: -1}).skip(skip).limit(limit)
-  res.status(200).json({status: true, totalPages, page, result:result})
-})
+  const result = await usersModel
+    .find()
+    .sort({ updatedAt: -1 })
+    .skip(skip)
+    .limit(limit);
+  res.status(200).json({ status: true, totalPages, page, result: result });
+});
+
+//DELETE
+//paginated user data for admin
+
+export const deleteData = asyncHandler(async (req, res) => {
+  const { id } = req?.params;
+
+  const result = await usersModel.findByIdAndDelete(id);
+
+  res.status(200).json({ status: true,message: 'Data deleted successfully' });
+});
